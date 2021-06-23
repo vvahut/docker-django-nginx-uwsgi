@@ -6,7 +6,6 @@ RUN apt install -y python3-virtualenv \
                      python3.8-dev \ 
                      libpcre3 \
                      libpcre3-dev \
-                     nginx \
                      python3-pip \
                      git \
                      vim
@@ -19,10 +18,3 @@ WORKDIR /home/django_test
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 CMD ["/usr/local/bin/uwsgi", "--ini", "/home/django_test/uwsgi.ini"]
-
-#RUN cp default /etc/nginx/sites-available
-#RUN cp uwsgi.service /etc/systemd/system
-#RUN systemctl restart nginx
-#RUN systemctl restart uwsgi
-
-#EXPOSE 80
