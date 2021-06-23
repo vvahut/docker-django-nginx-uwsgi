@@ -9,14 +9,14 @@ reverse proxyn kanssa.
 
 ```bash
 sudo snap install docker
-docker build nginx -t nginx_test
-docker build django -t django_test
+sudo docker build nginx -t nginx_test
+sudo docker build django -t django_test
 ```
 
 ## Ajaminen
 
 ```bash
-docker network create net1 
-docker run -d --net=net1 --name nginx_test -p 80:80 nginx_test
-docker run -d --net=net1 --name django_test -p 8080:8080 django_test
+sudo docker network create net1 
+sudo docker run -d --net=net1 --name nginx_test -p 80:80 nginx_test
+sudo docker run -d --net=net1 --name django_test -p 8080:8080 django_test
 ```
