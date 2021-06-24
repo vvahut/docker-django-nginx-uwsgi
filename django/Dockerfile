@@ -18,4 +18,4 @@ WORKDIR /home/django_test
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 CMD ["/usr/local/bin/uwsgi", "--ini", "/home/django_test/uwsgi.ini"]
-EXPOSE 8080
+EXPOSE 8000
