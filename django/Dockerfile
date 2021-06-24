@@ -15,7 +15,11 @@ RUN mkdir -p /home
 ADD . / /home/django_test/
 
 WORKDIR /home/django_test
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt && \
+    python3 manage.py migrate && \
+    python3 manage.py collectstatic --noinput
+
+VOLUME /home/django_test/static
 
 CMD ["/usr/local/bin/uwsgi", "--ini", "/home/django_test/uwsgi.ini"]
 EXPOSE 8000

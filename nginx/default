@@ -1,5 +1,7 @@
 events {}
 http {
+    include /etc/nginx/mime.types;
+
     server {
         listen 80;
         server_name localhost;
@@ -7,6 +9,11 @@ http {
         location / {
             uwsgi_pass django_test:8000;
             include uwsgi_params;
-       }
+        }
+ 
+        location /static {
+            autoindex on;
+            alias /home/django_test/static/;
+        }
    }
 }
