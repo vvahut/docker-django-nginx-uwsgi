@@ -13,6 +13,7 @@ RUN apt install -y python3-virtualenv \
 #RUN git clone https://www.github.com/vvahut/django_test.git
 RUN mkdir -p /home
 ADD . / /home/django_test/
+RUN chown -R www-data:www-data /home/django_test
 
 WORKDIR /home/django_test
 RUN pip3 install --no-cache-dir -r requirements.txt && \
