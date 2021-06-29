@@ -10,6 +10,9 @@ reverse proxyn kanssa.
 ```bash
 sudo snap install docker
 ```
+Asenna lisäksi Docker-compose osoitteesta:
+https://docs.docker.com/compose/install/
+
 
 ## Ajaminen
 
