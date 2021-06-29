@@ -1,4 +1,4 @@
-FROM node
+FROM node:alpine
 
 WORKDIR /usr/app
 
@@ -6,7 +6,7 @@ COPY ./package*.json ./
 RUN npm install --production
 
 COPY ./ ./
-RUN npm build
+RUN npm run build
 
 EXPOSE 7000
 USER node
