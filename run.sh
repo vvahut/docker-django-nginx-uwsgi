@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sudo docker rm -f nginx_test
 sudo docker rm -f django_test
 sudo docker network create net1
