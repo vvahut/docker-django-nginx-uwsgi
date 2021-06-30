@@ -8,7 +8,7 @@ function About() {
         <a>Home</a>
       </Link>
       <h1>About</h1>
-      <img src="/static/about.jpg" />
+      <img src="/assets/about.png" />
     </>
   )
 }

@@ -5,19 +5,29 @@ services:
     ports:
       - "80:80"
     volumes:
-      - static-files:/home/django_test/static
+      - static-back:/home/django_test/static
+      - static-front:/usr/app/public/assets
     networks:
       - network
   django_test:
     build: django
-    ports: 
-      - "8000:8000"
+    expose: 
+      - "8000"
     networks:
       - network
     volumes:
-      - static-files:/home/django_test/static
+      - static-back:/home/django_test/static
+  next_test:
+    build: next.js
+    expose: 
+      - "7000"
+    networks:
+      - network
+    volumes:
+      - static-front:/usr/app/public/assets
 volumes:
-  static-files:
+  static-front:
+  static-back:
 
 networks:
   network:
