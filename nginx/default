@@ -17,6 +17,11 @@ http {
             uwsgi_pass django_test:8000;
             include uwsgi_params;
         }
+
+        location /admin {
+            uwsgi_pass django_test:8000;
+            include uwsgi_params;
+        }
  
         location /static {
             autoindex on;
