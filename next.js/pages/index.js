@@ -8,7 +8,7 @@ function Home() {
         <a>About</a>
       </Link>
       <h1>Home</h1>
-      <img src="/static/home.jpg" />
+      <img src="/assets/home.png" />
     </>
   )
 }
