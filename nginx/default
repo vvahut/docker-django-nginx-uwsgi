@@ -8,12 +8,24 @@ http {
 
     server {
         listen 80;
+        server_name _;
+
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
 
         location / {
             proxy_pass http://next_upstream;
         }
 
         location /api {
+            uwsgi_pass django_test:8000;
+            include uwsgi_params;
+        }
+
+        location /admin {
             uwsgi_pass django_test:8000;
             include uwsgi_params;
         }
