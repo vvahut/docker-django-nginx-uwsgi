@@ -21,6 +21,12 @@ RUN pip3 install --no-cache-dir -r requirements.txt && \
 
 RUN chown -R www-data:www-data /home/django_test
 
+ENV DJANGO_SUPERUSER_PASSWORD=admin
+ENV DJANGO_SUPERUSER_USERNAME=admin
+ENV DJANGO_SUPERUSER_EMAIL=admin@email.com
+
+RUN python3 manage.py createsuperuser --no-input
+
 VOLUME /home/django_test/static
 
 CMD ["/usr/local/bin/uwsgi", "--ini", "/home/django_test/uwsgi.ini"]
