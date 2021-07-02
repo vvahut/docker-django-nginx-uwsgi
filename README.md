@@ -1,20 +1,18 @@
-# Docker-Django-Nginx-Uwsgi
+# Docker-Django-Next.js-Nginx-Uwsgi
 
-Docker-Django-Nginx-Uwsgi on testiprojekti dockeroidulle
-uwsgi-rajapintaa käyttävälle Django-esimerkkiprojektille, 
-jota käytetään yhdessä dockeroidun Nginx
-reverse proxyn kanssa.
+Docker-Django-Nextjs-Nginx-Uwsgi is test project stack
+that consists of dockerized Django Rest Framework + uwsgi, Next.js,
+and Nginx reverse proxy.
 
-## Asennus ja valmistelu
+## Installation
 
 ```bash
 sudo snap install docker
 ```
-Asenna lisäksi Docker-compose osoitteesta:
+Also install Docker-compose from:
 https://docs.docker.com/compose/install/
 
-
-## Ajaminen
+## Run
 
 ```bash
 sudo docker-compose up -d 
