@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ock98#pion#6p+@cv9k9el^&z2%a*1jkc!)9^qop02(h1br62v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['stack-nginx', 'stack-django', 'stack-next', 'localhost', '127.0.0.1']
 
 
 # Application definition
