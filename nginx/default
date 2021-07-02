@@ -3,7 +3,7 @@ http {
     include /etc/nginx/mime.types;
 
     upstream next_upstream {
-        server next_test:7000;
+        server stack-next:7000;
     }
 
     server {
@@ -21,12 +21,12 @@ http {
         }
 
         location /api {
-            uwsgi_pass django_test:8000;
+            uwsgi_pass stack-django:8000;
             include uwsgi_params;
         }
 
         location /admin {
-            uwsgi_pass django_test:8000;
+            uwsgi_pass stack-django:8000;
             include uwsgi_params;
         }
  

@@ -1,6 +1,6 @@
 version: "3.9"  # optional since v1.27.0
 services:
-  nginx_test:
+  stack-nginx:
     build: nginx
     ports:
       - "80:80"
@@ -9,7 +9,7 @@ services:
       - static-front:/usr/app/public/assets
     networks:
       - network
-  django_test:
+  stack-django:
     build: django
     expose: 
       - "8000"
@@ -17,7 +17,7 @@ services:
       - network
     volumes:
       - static-back:/home/django_test/static
-  next_test:
+  stack-next:
     build: next.js
     expose: 
       - "7000"
