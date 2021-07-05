@@ -3,3 +3,4 @@ venv/
 django/db.sqlite3
 *.swp
 .vagrant/
+*.log
