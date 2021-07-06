@@ -20,9 +20,6 @@ Vagrant.configure("2") do |config|
     end
     admin.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "admin.yml"
-      #ansible.compatibility_mode = '2.0'
-      #ansible.pip_install_cmd = "sudo apt-get install -y python3-distutils && curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3"
-      #ansible.install_mode = "pip"
       ansible.extra_vars = {
         #ansible_python_interpreter:"/usr/bin/python3"
         node_ip: "192.168.33.13"
@@ -31,48 +28,48 @@ Vagrant.configure("2") do |config|
   end 
 
   config.vm.define "test" do |test|
-    test.vm.box = "generic/ubuntu2010"
+    test.vm.box = "ubuntu/xenial64"
     test.vm.hostname = "test"
     test.vm.network "private_network", ip: "192.168.33.10"
     test.vm.provider "virtualbox" do |vb|
       vb.memory = 2048
     end
-    #test.vm.provision "ansible_local" do |ansible|
-    #  ansible.playbook = "/vagrant/node.yml"
-    #  ansible.extra_vars = {
-    #    node_ip: "192.168.33.10"
-    #  }
-    #end
+    test.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "node.yml"
+      ansible.extra_vars = {
+        node_ip: "192.168.33.10"
+      }
+    end
   end
 
   config.vm.define "qa" do |qa|
-    qa.vm.box = "generic/ubuntu2010"
+    qa.vm.box = "ubuntu/xenial64"
     qa.vm.hostname = "qa"
     qa.vm.network "private_network", ip: "192.168.33.11"
     qa.vm.provider "virtualbox" do |vb|
       vb.memory = 2048
     end
-    #qa.vm.provision "ansible_local" do |ansible|
-    #  ansible.playbook = "/../ansible/node.yml"
-    #  ansible.extra_vars = {
-    #    node_ip: "192.168.33.11"
-    #  }
-    #end
+    qa.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "node.yml"
+      ansible.extra_vars = {
+        node_ip: "192.168.33.11"
+      }
+    end
   end
 
   config.vm.define "production" do |production|
-    production.vm.box = "generic/ubuntu2010"
+    production.vm.box = "ubuntu/xenial64"
     production.vm.hostname = "production"
     production.vm.network "private_network", ip: "192.168.33.12"
     production.vm.provider "virtualbox" do |vb|
       vb.memory = 2048
     end
-    #production.vm.provision "ansible_local" do |ansible|
-    #  ansible.playbook = "node.yml"
-    #  ansible.extra_vars = {
-    #    node_ip: "192.168.33.12"
-    #  }
-    #end 
+    production.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "node.yml"
+      ansible.extra_vars = {
+        node_ip: "192.168.33.12"
+      }
+    end 
  end
  
   # Share an additional folder to the guest VM. The first argument is
