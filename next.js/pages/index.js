@@ -1,6 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
 
+function Home() {
+  return (
+    <>
+      <h1>Home</h1>
+    </>
+  )
+}
+
+/*
 function Home({content}) {
   return (
     <>
@@ -15,7 +24,8 @@ function Home({content}) {
       </>
   )
 }
-
+*/
+/*
 export async function getServerSideProps({req}) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
@@ -25,7 +35,7 @@ export async function getServerSideProps({req}) {
     //"client_secret": "876JHG76UKFJYGVHf867rFUTFGHCJ8JHV"
   }
 
-  const res = await fetch('http://stack-nginx/api', { headers: headers });
+  const res = await fetch('http://192.168.49.2:30178/api', { headers: headers });
   //const res = await fetch('http://192.168.32.4/api', { headers: headers });
   const content = await res.json()
 
@@ -37,5 +47,5 @@ export async function getServerSideProps({req}) {
     },
   }
 }
-
+*/
 export default Home

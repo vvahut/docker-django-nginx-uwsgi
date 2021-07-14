@@ -106,6 +106,10 @@
     #command: kubectl create -f https://docs.projectcalico.org/v3.4/getting-started/kubernetes/installation/hosted/calico.yaml
     #command: kubectl create -f https://docs.projectcalico.org/v3.14/getting-started/kubernetes/installation/hosted/calico.yaml
 
+  - name: app
+    #command: kubectl apply -f /app/stack-nginx-service.yaml /app/stack-next/service.yaml /app/stack-django-service.yaml
+    command: kubectl apply -f /app/kubernetes
+
   - name: Generate join command
     command: kubeadm token create --print-join-command
     register: join_command

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: stack-next
+  name: stack-next
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: stack-next
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/net1: "true"
+        io.kompose.service: stack-next
+    spec:
+      containers:
+        - image: docker-django-nginx-uwsgi_stack-next
+          imagePullPolicy: Never
+          name: stack-next
+          ports:
+            - containerPort: 7000
+          resources: {}
+          volumeMounts:
+            - mountPath: /usr/app/public/assets
+              name: static-front
+      restartPolicy: Always
+      volumes:
+        - name: static-front
+          persistentVolumeClaim:
+            claimName: static-front
+status: {}

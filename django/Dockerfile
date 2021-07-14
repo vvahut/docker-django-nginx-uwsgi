@@ -2,8 +2,8 @@ FROM ubuntu:18.04
 
 SHELL ["/bin/bash", "-c"]
 
-RUN apt update
-RUN apt install -y python3.8-venv \
+RUN apt update && \
+    apt install -y python3.8-venv \
                    build-essential \
                    python3.8-dev \
                    libpcre3 \
@@ -20,9 +20,9 @@ WORKDIR /home/django_test
 
 RUN python3.8 -m venv venv
 RUN source venv/bin/activate
-RUN python3.8 -m pip install --no-cache-dir -r requirements.txt && \
-    python3.8 manage.py migrate && \
-    python3.8 manage.py collectstatic --noinput
+RUN python3.8 -m pip install --no-cache-dir -r requirements.txt
+RUN python3.8 manage.py migrate
+#RUN python3.8 manage.py collectstatic --noinput
 
 RUN chown -R www-data:www-data /home/django_test
 
@@ -32,7 +32,5 @@ ENV DJANGO_SUPERUSER_EMAIL=admin@email.com
 
 RUN python3.8 manage.py createsuperuser --no-input
 
-VOLUME /home/django_test/static
-
-CMD ["/usr/local/bin/uwsgi", "--ini", "/home/django_test/uwsgi.ini"]
-EXPOSE 8000
+RUN ["chmod", "+x", "/home/django_test/entrypoint.sh"]
+ENTRYPOINT ["/home/django_test/entrypoint.sh"]
