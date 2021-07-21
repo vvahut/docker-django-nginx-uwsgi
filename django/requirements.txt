@@ -2,3 +2,4 @@ django
 uwsgi
 djangorestframework
 pygments
+psycopg2
