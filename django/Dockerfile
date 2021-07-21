@@ -2,6 +2,9 @@ FROM ubuntu:18.04
 
 SHELL ["/bin/bash", "-c"]
 
+ENV TZ=Europe/Helsinki
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN apt update && \
     apt install -y python3.8-venv \
                    build-essential \
@@ -11,7 +14,9 @@ RUN apt update && \
                    python3-pip \
                    git \
                    vim \
-                   libpq-dev
+                   libpq-dev \
+                   postgresql \
+                   postgresql-contrib
 
 #RUN git clone https://www.github.com/vvahut/django_test.git
 RUN mkdir -p /home
