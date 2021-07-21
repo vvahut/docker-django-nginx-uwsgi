@@ -32,7 +32,7 @@ spec:
             - containerPort: 7000
           resources: {}
           volumeMounts:
-            - mountPath: /usr/app/public/assets
+            - mountPath: /usr/app/public/assets_volume
               name: static-front
       restartPolicy: Always
       volumes:

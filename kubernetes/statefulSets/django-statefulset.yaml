@@ -34,19 +34,19 @@ spec:
           volumeMounts:
             - mountPath: /home/django_test/static
               name: static-back
-          #env:
-          #  - name: POSTGRES_USER
-          #    valueFrom:
-          #      secretKeyRef:
-          #        name: postgres-credentials
-          #        key: user
-          #  - name: POSTGRES_PASSWORD
-          #    valueFrom:
-          #      secretKeyRef:
-          #        name: postgres-credentials
-          #        key: password
-          #  - name: POSTGRES_HOST
-          #    value: postgres-service
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+            - name: POSTGRES_HOST
+              value: postgres-service
       restartPolicy: Always
       volumes:
         - name: static-back
