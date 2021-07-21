@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   annotations:
     kompose.cmd: kompose convert
@@ -9,12 +9,11 @@ metadata:
     io.kompose.service: stack-django
   name: stack-django
 spec:
+  serviceName: "django"
   replicas: 1
   selector:
     matchLabels:
       io.kompose.service: stack-django
-  strategy:
-    type: Recreate
   template:
     metadata:
       annotations:
@@ -35,22 +34,23 @@ spec:
           volumeMounts:
             - mountPath: /home/django_test/static
               name: static-back
-          env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: user
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: password
-            - name: POSTGRES_HOST
-              value: postgres-service
+          #env:
+          #  - name: POSTGRES_USER
+          #    valueFrom:
+          #      secretKeyRef:
+          #        name: postgres-credentials
+          #        key: user
+          #  - name: POSTGRES_PASSWORD
+          #    valueFrom:
+          #      secretKeyRef:
+          #        name: postgres-credentials
+          #        key: password
+          #  - name: POSTGRES_HOST
+          #    value: postgres-service
       restartPolicy: Always
       volumes:
         - name: static-back
           persistentVolumeClaim:
             claimName: static-back
-status: {}
+status:
+  replicas: 1

@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   annotations:
     kompose.cmd: kompose convert
@@ -13,8 +13,7 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: stack-next
-  strategy:
-    type: Recreate
+  serviceName: "next"
   template:
     metadata:
       annotations:
@@ -40,4 +39,5 @@ spec:
         - name: static-front
           persistentVolumeClaim:
             claimName: static-front
-status: {}
+status:
+  replicas: 1
