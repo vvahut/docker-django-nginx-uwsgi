@@ -19,7 +19,7 @@ https://docs.docker.com/compose/install/
 minikube start
 eval $(minikube -p minikube docker-env)
 docker-compose build
-kubectl apply -f ./kubernetes
+kubectl apply --recursive -f ./kubernetes
 ```
 
 ## Update containers
