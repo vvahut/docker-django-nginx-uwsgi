@@ -4,6 +4,10 @@ Docker-Django-Kubernetes-Nextjs-Nginx-Uwsgi is test project stack
 that consists of dockerized Django Rest Framework + uwsgi, Kubernetes, Next.js,
 and Nginx reverse proxy.
 
+## TODO
+
+Uses probably needlessly/erroneously StatefulSets.
+
 ## Installation
 
 ```bash
