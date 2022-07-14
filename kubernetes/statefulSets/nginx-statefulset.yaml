@@ -1,10 +1,6 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.22.0 (955b78124)
-  creationTimestamp: null
   labels:
     io.kompose.service: stack-nginx
   name: stack-nginx
@@ -16,22 +12,25 @@ spec:
   serviceName: "nginx"
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.22.0 (955b78124)
-      creationTimestamp: null
       labels:
         io.kompose.network/net1: "true"
         io.kompose.service: stack-nginx
     spec:
       initContainers:
-        - name: collectstatic
-          image: docker-django-nginx-uwsgi_stack-django
-          imagePullPolicy: Never
-          command: ['python3.8', 'manage.py', 'collectstatic', '--no-input']
-          volumeMounts:
-            - name: static-back
-              mountPath: /home/django_test/static/   
+         - name: assets
+           image: docker-django-nginx-uwsgi_stack-next
+           imagePullPolicy: Never
+           command: ['cp', '-r', '/usr/app/public/assets/.', '/usr/app/public/assets_volume']
+           volumeMounts:
+             - name: static-front
+               mountPath: /usr/app/public/assets_volume
+         - name: collectstatic
+           image: docker-django-nginx-uwsgi_stack-django
+           imagePullPolicy: Never
+           command: ['python3.8', 'manage.py', 'collectstatic', '--noinput']
+           volumeMounts:
+             - name: static-back
+               mountPath: /home/django_test/static/  
       containers:
         - image: docker-django-nginx-uwsgi_stack-nginx
           imagePullPolicy: Never
@@ -54,5 +53,8 @@ spec:
         - name: static-front
           persistentVolumeClaim:
             claimName: static-front
+        - name: static-db
+          persistentVolumeClaim:
+            claimName: static-db
 status:
   replicas: 1
