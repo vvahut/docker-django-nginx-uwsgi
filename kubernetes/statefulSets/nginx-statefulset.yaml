@@ -17,20 +17,35 @@ spec:
         io.kompose.service: stack-nginx
     spec:
       initContainers:
-         - name: assets
-           image: docker-django-nginx-uwsgi_stack-next
-           imagePullPolicy: Never
-           command: ['cp', '-r', '/usr/app/public/assets/.', '/usr/app/public/assets_volume']
-           volumeMounts:
-             - name: static-front
-               mountPath: /usr/app/public/assets_volume
-         - name: collectstatic
-           image: docker-django-nginx-uwsgi_stack-django
-           imagePullPolicy: Never
-           command: ['python3.8', 'manage.py', 'collectstatic', '--noinput']
-           volumeMounts:
-             - name: static-back
-               mountPath: /home/django_test/static/  
+        - name: assets
+          image: docker-django-nginx-uwsgi_stack-next
+          imagePullPolicy: Never
+          command: ['cp', '-r', '/usr/app/public/assets/.', '/usr/app/public/assets_volume']
+          volumeMounts:
+            - name: static-front
+              mountPath: /usr/app/public/assets_volume
+        - name: init
+          image: docker-django-nginx-uwsgi_stack-django
+          imagePullPolicy: Never
+          command: ['/bin/sh', '/home/django_test/init.sh']
+          #command: ['python3.8', 'manage.py', 'collectstatic', '--noinput']
+          volumeMounts:
+            - name: static-back
+              mountPath: /home/django_test/static/  
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+            - name: POSTGRES_HOST
+              value: postgres-service
+
       containers:
         - image: docker-django-nginx-uwsgi_stack-nginx
           imagePullPolicy: Never
