@@ -20,7 +20,12 @@ RUN apt update && \
 
 #RUN git clone https://www.github.com/vvahut/django_test.git
 RUN mkdir -p /home
-ADD . / /home/django_test/
+#ADD . / /home/django_test/
+ADD django_test/ /home/
+
+COPY requirements.txt /home/django_test/
+#COPY . /Dockerfile /home/django_test/
+COPY manage.py /home/django_test/
 
 WORKDIR /home/django_test
 
@@ -39,5 +44,6 @@ ENV DJANGO_SUPERUSER_EMAIL=admin@email.com
 
 #RUN python3.8 manage.py createsuperuser --no-input
 
+COPY . / /home/django_test/
 RUN ["chmod", "+x", "/home/django_test/entrypoint.sh"]
 ENTRYPOINT ["/home/django_test/entrypoint.sh"]
