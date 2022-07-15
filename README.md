@@ -6,7 +6,8 @@ and Nginx reverse proxy.
 
 ## TODO
 
-Uses probably needlessly/erroneously StatefulSets.
+- Uses probably needlessly/erroneously StatefulSets instead of Deployments
+- Have to see whether intialization (initContainers & scripts) could be done better
 
 ## Installation
 
@@ -25,6 +26,8 @@ eval $(minikube -p minikube docker-env)
 docker-compose build
 kubectl apply --recursive -f ./kubernetes
 ```
+You may need to load images manually to Minikube after building them
+with `minikube image load ...`.
 
 ## Update containers
 
