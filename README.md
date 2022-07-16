@@ -6,7 +6,6 @@ and Nginx reverse proxy.
 
 ## TODO
 
-- Uses probably needlessly/erroneously StatefulSets instead of Deployments
 - Have to see whether intialization (initContainers & scripts) could be done better
 
 ## Installation

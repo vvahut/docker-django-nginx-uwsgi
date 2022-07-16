@@ -1,11 +1,10 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   labels:
     io.kompose.service: stack-django
   name: stack-django
 spec:
-  serviceName: "django"
   replicas: 1
   selector:
     matchLabels:

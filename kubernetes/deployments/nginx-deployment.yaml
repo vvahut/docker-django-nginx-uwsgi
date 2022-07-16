@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   labels:
     io.kompose.service: stack-nginx
@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: stack-nginx
-  serviceName: "nginx"
   template:
     metadata:
       labels:
