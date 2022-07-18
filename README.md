@@ -7,6 +7,7 @@ and Nginx reverse proxy.
 ## TODO
 
 - Have to see whether intialization (initContainers & scripts) could be done better
+- Tighten uwsgi security settings
 
 ## Installation
 
